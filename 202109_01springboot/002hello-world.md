@@ -67,3 +67,14 @@ Webブラウザで http://localhost:8080 へアクセスします。
 ## Spring Boot を終了する
 
 **Boot Dashboard** で "demo" を選択し、 Stop ボタンを押します。
+
+## 環境情報
+
+動画で用いた環境の情報です。
+
+- Java: Temurin-11.0.12+7
+- Spring Boot: 2.5.4
+- Spring Tools: 4.11.1
+  - Lombok: 1.18.20
+- Git: 2.33.0.windows.2
+- VSCode: 1.60.0
