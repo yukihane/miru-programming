@@ -1,5 +1,7 @@
 # Windows Java開発環境セットアップ
 
+- https://www.youtube.com/watch?v=V3aEdHLasUU
+
 ## [Scoop](https://scoop.sh/) インストール
 
 Windowsメニューから "Windows PowerShell" を起動し、次の2コマンドを実行します。

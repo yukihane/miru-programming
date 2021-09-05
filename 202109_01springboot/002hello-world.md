@@ -1,5 +1,7 @@
 # Hello, World! on Spring Boot
 
+- https://youtu.be/V3aEdHLasUU?t=1655
+
 ## ひな形を作成する
 
 Spring Initializr https://start.spring.io/ サイトに行きます。
