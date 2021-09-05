@@ -8,9 +8,10 @@ Set-ExecutionPolicy RemoteSigned -scope CurrentUser
 iwr -useb get.scoop.sh | iex
 ```
 
-続いて、次の2コマンドを実行して`extras`, `java`バケットを追加します。
+続いて、`extras`, `java`バケットを追加します。バケット追加には `git` パッケージのインストールが必要なので、先んじて `git` もインストールします。
 
 ```
+scoop install git
 scoop bucket add extras
 scoop bucket add java
 ```
@@ -24,7 +25,7 @@ scoop bucket add java
 PowerShell で次のコマンドを実行します。
 
 ```
-scoop install git pwsh conemu vscode adopt11-hotspot maven gradle
+scoop install pwsh conemu vscode adopt11-hotspot maven gradle
 ```
 
 ### TIPS
