@@ -125,3 +125,10 @@ STSを起動し、次の操作を行います:
 1. ツリーメニューから **Java > Code Style > Formatter** を選択します。
 1. **Import** を選択し、上でチェックアウトしたリポジトリの [`eclipse/java-format-setting.xml`](https://github.com/yukihane/prefs/blob/master/eclipse/java-format-setting.xml) を選択します。
 1. **Active profile** が "custom" になっていることを確認して **Apply and Close** でダイアログを閉じます。
+
+続いて、Lombokをインストールします:
+
+1. STS を終了させます。
+1. https://projectlombok.org/download から `lombok.jar` をダウンロードします。
+1. `java -jar ~/Downloads/lombok.jar` コマンドを実行し、インストーラを起動します。
+1. `SpringToolSuite4.exe` の場所を指定してインストール実行します。
