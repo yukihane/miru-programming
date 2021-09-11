@@ -1,8 +1,11 @@
-# Windows Java 開発環境セットアップ
+:toc:
+
+= Windows Java 開発環境セットアップ
+
 
 - https://www.youtube.com/watch?v=V3aEdHLasUU
 
-## [Scoop](https://scoop.sh/) インストール
+== [Scoop](https://scoop.sh/) インストール
 
 Windows メニューから "Windows PowerShell" を起動し、次の 2 コマンドを実行します。
 
@@ -19,11 +22,11 @@ scoop bucket add extras
 scoop bucket add java
 ```
 
-### TIPS
+=== TIPS
 
 - PowerShell プロンプト上では、右クリックでペーストできます。
 
-## 各種開発ツールインストール
+== 各種開発ツールインストール
 
 PowerShell で次のコマンドを実行します。
 
@@ -31,14 +34,14 @@ PowerShell で次のコマンドを実行します。
 scoop install pwsh conemu vscode adopt11-hotspot maven gradle
 ```
 
-### TIPS
+=== TIPS
 
 - ここでインストールしている Maven や Gradle は、 Spring Boot を開発する際には必須ではありません(Spring Boot には必要に応じてダウンロードする仕組みがある)が、一般的な Java 開発を行う場合には必要なのでここでインストールしています。
 - `adopt11-hotspot` としてインストールしている JDK は、 [Adoptium](https://adoptium.net/) と呼ばれているものです。これは、以前の [AdoptOpenJDK](https://adoptium.net/faq.html#AdoptOpenJDK) に相当するディストリビューションです。
 - Java 系ツールに特化した [SDKMAN!](https://sdkman.io/) というパッケージマネージャもあり、 JDK 等はこちらでインストールすることもあります。ただ、あまり Windows のことは考慮されていないので少しコツが必要になります。
   - 具体的には、[内部でシンボリックリンクを利用しているのでその考慮が必要になります](https://github.com/sdkman/sdkman-cli/issues/593#issuecomment-467767923)。
 
-## ConEmu セットアップ
+== ConEmu セットアップ
 
 (備考: ConEmu の代わりに、[第 3 回の動画](https://www.youtube.com/watch?v=E-ICm9lBgFg) 冒頭で Windows Terminal を使用してそちらを利用することにしました(のでそちらを先に見てもらえれば、ConEmu のセットアップは不要です)。)
 
@@ -52,7 +55,7 @@ C:\Users\yuki\scoop\apps\git\current\git-cmd.exe --no-cd --command=usr/bin/bash.
 
 ![ConEmu Settings](./img/001conemu-settings.png)
 
-## VSCode セットアップ
+== VSCode セットアップ
 
 VSCode 上で `Ctrl+Shift+P` キーを押すと[コマンドパレット](https://code.visualstudio.com/docs/getstarted/userinterface#_command-palette)が開きます。
 
@@ -72,12 +75,12 @@ VSCode 上で `Ctrl+Shift+P` キーを押すと[コマンドパレット](https:
 }
 ```
 
-### TIPS
+=== TIPS
 
 - 設定の説明は次のページにあります:
   - https://code.visualstudio.com/docs/getstarted/settings
 
-## Git セットアップ
+== Git セットアップ
 
 Git Bash(ConEmu) を開き、次のコマンドを入力します(`user.name`, `user.email` は自身のものを入力します):
 
@@ -94,14 +97,14 @@ git config --global submodule.recurse true
 git config --global alias.logshort 'log --pretty=format:"%h %an %ai %s"'
 ```
 
-### TIPS
+=== TIPS
 
 - 設定情報は次のコマンドで確認できます:
   - `git config -l --show-origin`
 - コンフィグの説明は次のページにあります:
   - https://git-scm.com/docs/git-config#_variables
 
-## Spring Tools 4 for Eclipse(STS) インストール & セットアップ
+== Spring Tools 4 for Eclipse(STS) インストール & セットアップ
 
 https://spring.io/tools から Spring Tools 4 for Eclipse をダウンロードします。
 
