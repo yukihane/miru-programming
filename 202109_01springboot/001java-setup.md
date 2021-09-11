@@ -1,10 +1,11 @@
-# Windows Java開発環境セットアップ
+# Windows Java 開発環境セットアップ
 
 - https://www.youtube.com/watch?v=V3aEdHLasUU
 
 ## [Scoop](https://scoop.sh/) インストール
 
-Windowsメニューから "Windows PowerShell" を起動し、次の2コマンドを実行します。
+Windows メニューから "Windows PowerShell" を起動し、次の 2 コマンドを実行します。
+
 ```
 Set-ExecutionPolicy RemoteSigned -scope CurrentUser
 iwr -useb get.scoop.sh | iex
@@ -20,7 +21,7 @@ scoop bucket add java
 
 ### TIPS
 
-- PowerShellプロンプト上では、右クリックでペーストできます。
+- PowerShell プロンプト上では、右クリックでペーストできます。
 
 ## 各種開発ツールインストール
 
@@ -33,11 +34,13 @@ scoop install pwsh conemu vscode adopt11-hotspot maven gradle
 ### TIPS
 
 - ここでインストールしている Maven や Gradle は、 Spring Boot を開発する際には必須ではありません(Spring Boot には必要に応じてダウンロードする仕組みがある)が、一般的な Java 開発を行う場合には必要なのでここでインストールしています。
-- `adopt11-hotspot` としてインストールしているJDKは、 [Adoptium](https://adoptium.net/) と呼ばれているものです。これは、以前の [AdoptOpenJDK](https://adoptium.net/faq.html#AdoptOpenJDK) に相当するディストリビューションです。
-- Java系ツールに特化した [SDKMAN!](https://sdkman.io/) というパッケージマネージャもあり、 JDK 等はこちらでインストールすることもあります。ただ、あまり Windows のことは考慮されていないので少しコツが必要になります。
+- `adopt11-hotspot` としてインストールしている JDK は、 [Adoptium](https://adoptium.net/) と呼ばれているものです。これは、以前の [AdoptOpenJDK](https://adoptium.net/faq.html#AdoptOpenJDK) に相当するディストリビューションです。
+- Java 系ツールに特化した [SDKMAN!](https://sdkman.io/) というパッケージマネージャもあり、 JDK 等はこちらでインストールすることもあります。ただ、あまり Windows のことは考慮されていないので少しコツが必要になります。
   - 具体的には、[内部でシンボリックリンクを利用しているのでその考慮が必要になります](https://github.com/sdkman/sdkman-cli/issues/593#issuecomment-467767923)。
 
 ## ConEmu セットアップ
+
+(備考: ConEmu の代わりに、[第 3 回の動画](https://www.youtube.com/watch?v=E-ICm9lBgFg) 冒頭で Windows Terminal を使用してそちらを利用することにしました(のでそちらを先に見てもらえれば、ConEmu のセットアップは不要です)。)
 
 参考: https://conemu.github.io/en/GitForWindows.html
 
@@ -65,7 +68,7 @@ VSCode 上で `Ctrl+Shift+P` キーを押すと[コマンドパレット](https:
   "files.eol": "\n",
   "editor.formatOnSave": true,
   "editor.minimap.enabled": false,
-  "window.title": "${dirty}${activeEditorMedium}${separator}${rootName}",
+  "window.title": "${dirty}${activeEditorMedium}${separator}${rootName}"
 }
 ```
 
@@ -102,7 +105,7 @@ git config --global alias.logshort 'log --pretty=format:"%h %an %ai %s"'
 
 https://spring.io/tools から Spring Tools 4 for Eclipse をダウンロードします。
 
-Git Bash(ConEmu) を開いて次のコマンドを実行し、ダウンロードしたファイルを `~/Documents/opt` ディレクトリに展開します(3行目は実際にダウンロードしたファイル名を指定してください):
+Git Bash(ConEmu) を開いて次のコマンドを実行し、ダウンロードしたファイルを `~/Documents/opt` ディレクトリに展開します(3 行目は実際にダウンロードしたファイル名を指定してください):
 
 ```
 mkdir ~/Documents/opt
@@ -110,25 +113,26 @@ cd ~/Documents/opt
 java -jar ~/Downloads/spring-tool-suite-4-4.11.1.RELEASE-e4.20.0-win32.win32.x86_64.self-extracting.jar
 ```
 
-同じくGit Bash で次のコマンドを入力し、設定ファイルが格納されたリポジトリをチェックアウトします:
+同じく Git Bash で次のコマンドを入力し、設定ファイルが格納されたリポジトリをチェックアウトします:
+
 ```
 mkdir ~/Documents/repos
 cd ~/Documents/repos
 git clone https://github.com/yukihane/prefs.git
 ```
 
-STSを起動し、次の操作を行います:
+STS を起動し、次の操作を行います:
 
 1. メニューから **File > Import** を選択します。
 1. **General > Preferences** を選択します。
 1. 上でチェックアウトしたリポジトリの [`eclipse/eclipse.epf`](https://github.com/yukihane/prefs/blob/master/eclipse/eclipse.epf) を選択します。
-1. STSの再起動を促されるので指示に従います。
+1. STS の再起動を促されるので指示に従います。
 1. 再起動したら、メニューから **Window > Preferences** を選択します。
 1. ツリーメニューから **Java > Code Style > Formatter** を選択します。
 1. **Import** を選択し、上でチェックアウトしたリポジトリの [`eclipse/java-format-setting.xml`](https://github.com/yukihane/prefs/blob/master/eclipse/java-format-setting.xml) を選択します。
 1. **Active profile** が "custom" になっていることを確認して **Apply and Close** でダイアログを閉じます。
 
-続いて、Lombokをインストールします:
+続いて、Lombok をインストールします:
 
 1. STS を終了させます。
 1. https://projectlombok.org/download から `lombok.jar` をダウンロードします。
