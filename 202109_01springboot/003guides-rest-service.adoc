@@ -125,7 +125,7 @@ Lombokの公式サイトは https://projectlombok.org です。
 * https://projectlombok.org/features/Data[`@Data`]
 ** データの入れ物として定義するクラスでよく使います。
 * https://projectlombok.org/features/log[`@Slf4j`]
-** ロガー陽のフィールドを自動生成します。コントローラやサービスといった役割のクラスによく使います。
+** ロガー用のフィールドを自動生成します。コントローラやサービスといった役割のクラスによく使います。
 * https://projectlombok.org/features/constructor[`@RequiredArgsConstructor`]
 ** `final` 修飾子がついているフィールドで、初期化していないものを引数に取るコンストラクタを自動生成します。これもコントローラやサービスといった役割のクラスによく使います。
 * https://projectlombok.org/features/NonNull[`@NonNull`]
