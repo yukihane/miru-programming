@@ -6,12 +6,13 @@
 == 関連リンク
 
 * YouTube リンク
-** https://www.youtube.com/watch?v=E-ICm9lBgFg
+** https://youtu.be/E-ICm9lBgFg
+** https://youtu.be/ik9C4qXvWYA
 * 資料
 ** https://spring.io/guides/gs/rest-service/[Getting Started | Building a RESTful Web Service] (https://spring.pleiades.io/guides/gs/rest-service/[日本語バージョン])
 ** https://www.oracle.com/jp/java/technologies/documentation.html[Java SE 日本語ドキュメント] > https://docs.oracle.com/javase/jp/11/docs/api/index.html[Java11 API 仕様]
 
-== 前回の補遺: Windows Terminal インストールとセットアップ (00:00)
+== 前回の補遺: Windows Terminal インストールとセットアップ (https://youtu.be/E-ICm9lBgFg[00:00])
 
 === プログラミング用フォントインストール
 
@@ -61,7 +62,7 @@ scoop install windows-terminal
 
 最後に、デフォルトで起動するプロファイルをこの "Git Bash" に指定しておきます。Windows Terminal の設定画面で "スタートアップ" を選択し、 "既定のプロファイル" で "Git Bash" を選択します。
 
-== 本題に入る前に: 公式ガイドの読み進め方
+== 本題に入る前に: 公式ガイドの読み進め方 (https://youtu.be/E-ICm9lBgFg?t=635[10:35])
 
 各ガイドには Git リポジトリが付属していて、少なくとも初期状態のコード(initial)と、最終的な状態のコード(complete)が格納されています。
 
@@ -73,5 +74,90 @@ complete ディレクトリのコードを動かしてみて全体像を掴ん�
 
 == Building a RESTful Web Service
 
-- [Spring Initializr](https://start.spring.io/) の使い方
--
+=== 完成版を動かしてみる (https://youtu.be/E-ICm9lBgFg?t=823[13:43])
+
+https://spring.pleiades.io/guides/gs/rest-service/[今回のガイドページ] 右に表示されている https://github.com/spring-guides/gs-rest-service["リポジトリに移動"] リンクから公式リポジトリに飛びます。
+
+"Code" ボタンを押して表示されるリポジトリURLをコピーします。このリポジトリを clone し、実行します。
+
+----
+cd ~/Documents/repo
+git clone https://github.com/spring-guides/gs-rest-service.git
+cd gs-rest-service/complete
+mvn spring-boot:run
+----
+
+起動したサーバにリクエストしてみます。
+Windows Terminalで新しいターミナルタブを開き、 `curl` コマンドを実行します。
+
+----
+curl http://localhost:8080/greeting
+----
+
+クエリパラメータ付きでもリクエストしてみます。
+
+----
+curl http://localhost:8080/greeting?name=User 
+----
+
+JSON形式のレスポンスが出力されることを確認します。
+
+=== 自身で実装してみる (https://youtu.be/E-ICm9lBgFg?t=1136[18:56])
+
+公式ガイド https://spring.io/guides/gs/rest-service/[Getting Started | Building a RESTful Web Service](https://spring.pleiades.io/guides/gs/rest-service/[日本語バージョン]) を参照してください。
+
+==== TIPS
+
+Spring Initializr の Webサイト https://start.spring.io/ から以外にもプロジェクトのひな型を生成する方法があります。
+
+* STS のメニュー **File > New > Spring Starter Project**  から
+* Spring Boot CLI を用いて
+** https://docs.spring.io/spring-boot/docs/current/reference/html/cli.html (https://spring.pleiades.io/spring-boot/docs/current/reference/html/cli.html[日本語訳])
+
+== おまけ
+
+=== よく使う Lombok アノテーション
+
+Lombokの公式サイトは https://projectlombok.org です。
+アノテーションの説明は https://projectlombok.org/features/[Features] メニューから辿れます。
+独断でよく使うものを列挙してみます:
+
+* https://projectlombok.org/features/Data[`@Data`]
+** データの入れ物として定義するクラスでよく使います。
+* https://projectlombok.org/features/log[`@Slf4j`]
+** ロガー陽のフィールドを自動生成します。コントローラやサービスといった役割のクラスによく使います。
+* https://projectlombok.org/features/constructor[`@RequiredArgsConstructor`]
+** `final` 修飾子がついているフィールドで、初期化していないものを引数に取るコンストラクタを自動生成します。これもコントローラやサービスといった役割のクラスによく使います。
+* https://projectlombok.org/features/NonNull[`@NonNull`]
+** 引数やフィールドに付与することで、非 `null` チェックを行います。
+
+=== Componentとは
+
+ライフサイクルの管理(生殺与奪の権)をフレームワークに任せたクラスのことです。
+
+Componentをフレームワークが認識するための処理を scan と呼んでいます。
+
+Bean という単語も Component と同じ意味で使われます(※ 文脈にもよります)。
+
+=== `@Component` と `@Bean`
+
+上で Component と Bean は同じ意味、と言いましたが、 `@Component` アノテーションと `@Ban` アノテーションは同じではありません。
+
+* `@Component`
+** クラスに付けます
+** 付けたクラスが Component だと宣言したことになります
+
+* `@Bean`
+** (`@Configuration` の)メソッドに付けます
+** 付けたメソッドでフレームワークがオブジェクト生成します
+
+=== guides のコードについて
+
+Spring Boot が管理する Component のライフサイクルは、デフォルトでは Singleton で、一度作ったオブジェクトはずっと使いまわされます。
+
+今回作成した `GreetingController` も同じで、ユーザが送信してきたリクエストは全て同じオブジェクトが処理を引き受けます。
+
+このため、スレッドセーフ性を保つために `AtomicLong` が利用されています。
+
+…が、普通は `Controller` に状態を持たせるような実装は行いません。
+状態は、例えばDBに保存しておいて、リクエストの都度読みだすようにしたりします。
