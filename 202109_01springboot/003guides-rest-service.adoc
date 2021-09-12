@@ -151,6 +151,12 @@ Bean という単語も Component と同じ意味で使われます(※ 文脈�
 ** (`@Configuration` の)メソッドに付けます
 ** 付けたメソッドでフレームワークがオブジェクト生成します
 
+=== `@Component` 類似アノテーション
+
+* `@Controller`, `@RestController`
+* `@Service`
+* `@Repository`
+
 === guides のコードについて
 
 Spring Boot が管理する Component のライフサイクルは、デフォルトでは Singleton で、一度作ったオブジェクトはずっと使いまわされます。
