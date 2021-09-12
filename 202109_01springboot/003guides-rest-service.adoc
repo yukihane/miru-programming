@@ -1,0 +1,171 @@
+:toc:
+
+
+= Spring 公式ガイドを観る No.1: Building a RESTful Web Service
+
+== 関連リンク
+
+* YouTube リンク
+** https://youtu.be/E-ICm9lBgFg
+** https://youtu.be/ik9C4qXvWYA
+* 資料
+** https://spring.io/guides/gs/rest-service/[Getting Started | Building a RESTful Web Service] (https://spring.pleiades.io/guides/gs/rest-service/[日本語バージョン])
+** https://www.oracle.com/jp/java/technologies/documentation.html[Java SE 日本語ドキュメント] > https://docs.oracle.com/javase/jp/11/docs/api/index.html[Java11 API 仕様]
+
+== 前回の補遺: Windows Terminal インストールとセットアップ (https://youtu.be/E-ICm9lBgFg[00:00])
+
+=== プログラミング用フォントインストール
+
+動画の説明とは順序が変わりますが、先にフォントをインストールしておきます。
+
+プログラミング用フォントであれば何でも良いですが、今回は Cica をインストールし使用することにします。
+
+(なお、 Cica 以外にどんなフォントがあるか知りたい場合は "プログラミング用フォント" といったキーワードで検索してみてください。無料で利用できるものも多数あります。)
+
+* https://github.com/miiton/Cica/releases
+
+上のページから最新版の zip ファイルをダウンロードします。
+本ドキュメント記載時点では https://github.com/miiton/Cica/releases/download/v5.0.2/Cica_v5.0.2_with_emoji.zip[`Cica_v5.0.2_with_emoji.zip`] です。
+
+ダウンロードした `.zip` ファイルを展開し、 `Cica-Regular.ttf` をダブルクリックするとウィンドウが開きますので、 "インストール" ボタンを押してインストールします。
+
+=== Windows Terminal インストール
+
+PowerShell Core を起動し、以下のコマンドでインストールします:
+
+----
+scoop install windows-terminal
+----
+
+=== Windows Terminal セットアップ
+
+- 参考: https://stackoverflow.com/a/57369284/4506703[Adding Git-Bash to the new Windows Terminal] - Stack Overflow
+
+. Windows Terminal を起動し、 `Ctrl` + `,` キーを押して設定画面を開きます。
+. "新しいプロファイルを追加します" を押し、既存のプロファイルを "複製" し、そのまま "保存" します。
+. "JSON ファイルを開く" を押し、 VSCode で開きます。
+
+`name` が "`PowerShell (\u30b3\u30d4\u30fc)`"(上で複製したものです)となっているものを探し、`commandline`, `icon`, `name` の値をそれぞれ次の通りに設定します。
+(これら以外の項目は変更せずに残しておいてください。)
+
+----
+"commandline": "%USERPROFILE%/scoop/apps/git/current/usr/bin/bash.exe -l -i",
+"icon": "%USERPROFILE%/scoop/apps/git/current/usr/share/git/git-for-windows.ico",
+"name": "Git Bash",
+----
+
+続いて、同じプロファイル設定に `fontFace` 項目を追加します。ここでは先にインストールしておいた Cica フォントを指定します。
+
+----
+"fontFace": "Cica"
+----
+
+最後に、デフォルトで起動するプロファイルをこの "Git Bash" に指定しておきます。Windows Terminal の設定画面で "スタートアップ" を選択し、 "既定のプロファイル" で "Git Bash" を選択します。
+
+== 本題に入る前に: 公式ガイドの読み進め方 (https://youtu.be/E-ICm9lBgFg?t=635[10:35])
+
+各ガイドには Git リポジトリが付属していて、少なくとも初期状態のコード(initial)と、最終的な状態のコード(complete)が格納されています。
+
+初期状態のコードは、写経する上で本質的でない部分をスキップするのに役立ちます。
+
+最終状態のコードは実行可能で、このガイドが何を説明したいかを実際に動かしてみながら確認するのに役立ちます。
+
+complete ディレクトリのコードを動かしてみて全体像を掴んでから本文を読み進めていくのがお勧めです(ガイド文章の構成もそのようになっているはずです)。
+
+== Building a RESTful Web Service
+
+=== 完成版を動かしてみる (https://youtu.be/E-ICm9lBgFg?t=823[13:43])
+
+https://spring.pleiades.io/guides/gs/rest-service/[今回のガイドページ] 右に表示されている https://github.com/spring-guides/gs-rest-service["リポジトリに移動"] リンクから公式リポジトリに飛びます。
+
+"Code" ボタンを押して表示されるリポジトリURLをコピーします。このリポジトリを clone し、実行します。
+
+----
+cd ~/Documents/repo
+git clone https://github.com/spring-guides/gs-rest-service.git
+cd gs-rest-service/complete
+mvn spring-boot:run
+----
+
+起動したサーバにリクエストしてみます。
+Windows Terminalで新しいターミナルタブを開き、 `curl` コマンドを実行します。
+
+----
+curl http://localhost:8080/greeting
+----
+
+クエリパラメータ付きでもリクエストしてみます。
+
+----
+curl http://localhost:8080/greeting?name=User 
+----
+
+JSON形式のレスポンスが出力されることを確認します。
+
+=== 自身で実装してみる (https://youtu.be/E-ICm9lBgFg?t=1136[18:56])
+
+公式ガイド https://spring.io/guides/gs/rest-service/[Getting Started | Building a RESTful Web Service](https://spring.pleiades.io/guides/gs/rest-service/[日本語バージョン]) を参照してください。
+
+==== TIPS
+
+Spring Initializr の Webサイト https://start.spring.io/ から以外にもプロジェクトのひな型を生成する方法があります。
+
+* STS のメニュー **File > New > Spring Starter Project**  から
+* Spring Boot CLI を用いて
+** https://docs.spring.io/spring-boot/docs/current/reference/html/cli.html (https://spring.pleiades.io/spring-boot/docs/current/reference/html/cli.html[日本語訳])
+
+== おまけ
+
+=== よく使う Lombok アノテーション
+
+Lombokの公式サイトは https://projectlombok.org です。
+アノテーションの説明は https://projectlombok.org/features/[Features] メニューから辿れます。
+独断でよく使うものを列挙してみます:
+
+* https://projectlombok.org/features/Data[`@Data`]
+** データの入れ物として定義するクラスでよく使います。
+* https://projectlombok.org/features/log[`@Slf4j`]
+** ロガー用のフィールドを自動生成します。コントローラやサービスといった役割のクラスによく使います。
+* https://projectlombok.org/features/constructor[`@RequiredArgsConstructor`]
+** `final` 修飾子がついているフィールドで、初期化していないものを引数に取るコンストラクタを自動生成します。これもコントローラやサービスといった役割のクラスによく使います。
+* https://projectlombok.org/features/NonNull[`@NonNull`]
+** 引数やフィールドに付与することで、非 `null` チェックを行います。
+
+=== Componentとは
+
+ライフサイクルの管理をフレームワークに任せたクラスのことです。
+
+オブジェクトの生成をフレームワークが行うことになります。フレームワークが生成したオブジェクトを利用するために受け取る仕組みが DI(Dependency Injection) です。
+
+Componentをフレームワークが認識するための処理を scan と呼んでいます。
+
+Bean という単語も Component と同じ意味で使われます(※ 文脈にもよります)。
+
+=== `@Component` と `@Bean`
+
+上で Component と Bean は同じ意味、と言いましたが、 `@Component` アノテーションと `@Ban` アノテーションは同じではありません。
+
+* `@Component`
+** クラスに付けます
+** 付けたクラスが Component だと宣言したことになります
+
+* `@Bean`
+** (`@Configuration` の)メソッドに付けます
+** 付けたメソッドでフレームワークがオブジェクト生成します
+
+=== `@Component` 類似アノテーション
+
+* `@Controller`, `@RestController`
+* `@Service`
+* `@Repository`
+
+=== guides のコードについて
+
+Spring Boot が管理する Component のライフサイクルは、デフォルトでは Singleton で、一度作ったオブジェクトはずっと使いまわされます。
+
+今回作成した `GreetingController` も同じで、ユーザが送信してきたリクエストは全て同じオブジェクトが処理を引き受けます。
+
+このため、スレッドセーフ性を保つために `AtomicLong` が利用されています。
+
+…が、普通は `Controller` に状態を持たせるような実装は行いません。
+状態は、例えばDBに保存しておいて、リクエストの都度読みだすようにしたりします。
