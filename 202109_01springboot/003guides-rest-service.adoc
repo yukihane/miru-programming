@@ -143,7 +143,7 @@ Bean という単語も Component と同じ意味で使われます(※ 文脈�
 
 === `@Component` と `@Bean`
 
-上で Component と Bean は同じ意味、と言いましたが、 `@Component` アノテーションと `@Ban` アノテーションは同じではありません。
+上で Component と Bean は同じ意味、と言いましたが、 `@Component` アノテーションと `@Bean` アノテーションは同じではありません。
 
 * `@Component`
 ** クラスに付けます
