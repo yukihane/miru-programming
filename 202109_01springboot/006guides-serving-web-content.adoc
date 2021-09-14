@@ -1,0 +1,44 @@
+:toc:
+
+= Spring 公式ガイドを観る No.2: Serving Web Content with Spring MVC
+
+== リンク
+
+* 動画
+** https://youtu.be/u4Ijneogxbc
+* 資料
+** https://spring.io/guides/gs/serving-web-content/[Serving Web Content with Spring MVC] (https://spring.pleiades.io/guides/gs/serving-web-content/[日本語訳])
+
+== 解説
+
+本筋の解説は公式ガイドを読んでください。
+
+=== Spring Boot 開発で読むことになる公式ドキュメント
+
+次の 4 種類のドキュメントは頻繁に参照することになるでしょう。
+
+* https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/[Spring Boot] (https://spring.pleiades.io/spring-boot/docs/current/reference/htmlsingle/[日本語訳])
+* https://docs.spring.io/spring-framework/docs/current/reference/html/web.html[Spring MVC] (https://spring.pleiades.io/spring-framework/docs/current/reference/html/web.html[日本語訳])
+* https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#spring-core[Spring Framework Core] (https://spring.pleiades.io/spring-framework/docs/current/reference/html/core.html#spring-core[日本語訳])
+* https://docs.spring.io/spring-security/site/docs/current/reference/html5/[Spring Security] (https://spring.pleiades.io/spring-security/site/docs/current/reference/html5/[日本語訳])
+
+=== `@Controller` と `@RestController`
+
+* https://spring.pleiades.io/spring-framework/docs/current/javadoc-api/org/springframework/stereotype/Controller.html[`@Controller`]
+* https://spring.pleiades.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/RestController.html[ `@RestController`]
+* https://spring.pleiades.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/ResponseBody.html[`@ResponseBody`]
+
+`@Controller` に `@ResponseBody` を追加したものが `@RestController` です。
+
+`@ResponseBody` を付けると、戻り値が(`MessageConverter` で変換されて)そのままクライアントに返ります。
+
+=== Controller のメソッド引数について, `Model` について
+
+* https://docs.spring.io/spring-framework/docs/5.3.9/reference/html/web.html#mvc-ann-arguments[1.3.3. Handler Methods > Method Arguments]
+** 日本語訳: https://spring.pleiades.io/spring-framework/docs/5.3.9/reference/html/web.html#mvc-ann-arguments[1.3.3. 処理メソッド > メソッド引数]
+* https://spring.pleiades.io/spring-framework/docs/current/javadoc-api/org/springframework/ui/Model.html[`Model` API doc]
+
+=== Thymeleaf
+
+* https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf_ja.html[Tutorial: Using Thymeleaf (ja)]
+* https://www.thymeleaf.org/doc/tutorials/3.0/thymeleafspring.html[Tutorial: Thymeleaf + Spring] (日本語訳無し)
